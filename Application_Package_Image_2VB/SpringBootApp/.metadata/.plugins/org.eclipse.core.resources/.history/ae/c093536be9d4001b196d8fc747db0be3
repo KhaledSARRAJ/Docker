@@ -1,0 +1,49 @@
+package com.example.demo.controler;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entity.User;
+import com.example.demo.service.UserService;
+import com.example.demo.ui.reponse.UserResponse;
+import com.example.demo.ui.request.UserRequest;
+
+@RestController
+@RequestMapping("/users") //http://localhost:8080/users
+public class UserRest {
+	@Autowired
+	UserService userservice;
+	
+	@GetMapping
+	public String getUser() {
+		return "get user was called";
+	}
+ //@RequestBody UserRequest userRequest
+	@PostMapping
+	public UserResponse createUser() {
+		
+		User user = new User();
+		user.setEmail("mm@gmail.com");
+		user.setFirstName("SARRAJ");
+		user.setLastName("khaled");
+		user.setPassword("aaaa");
+		System.out.println("create user was called");
+		User newUser = userservice.cretateUser(user);
+		System.out.println(newUser);
+		return null;
+	}
+	@PutMapping
+	public String updateUser() {
+		return "update user was called";
+	}
+	@DeleteMapping
+	public String deleteUser() {
+		return "delete user was called";
+	}
+}

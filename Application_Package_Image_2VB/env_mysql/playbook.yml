@@ -1,0 +1,17 @@
+- hosts: all
+  vars:
+    mysql_root_username: root
+    mysql_root_password: root
+    mysql_databases:
+    - name: mydb
+      encoding: latin1
+      collation: latin1_general_ci
+      
+    mysql_users:
+    - name: app_user
+      host: "%"
+      password: app_pass
+      priv: "mydb.*:ALL"
+  roles:
+    - role: geerlingguy.mysql
+      become: yes
